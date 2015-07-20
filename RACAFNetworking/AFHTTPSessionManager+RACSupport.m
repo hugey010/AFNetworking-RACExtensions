@@ -11,6 +11,7 @@
 #import "AFHTTPSessionManager+RACSupport.h"
 
 NSString *const RACAFNResponseObjectErrorKey = @"responseObject";
+NSString *const RACAFNResponseErrorKey = @"response";
 
 @implementation AFHTTPSessionManager (RACSupport)
 
@@ -35,12 +36,9 @@ NSString *const RACAFNResponseObjectErrorKey = @"responseObject";
 		
 		NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 			if (error) {
-				NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
-        			if (responseObject) {
-					userInfo[RACAFNResponseObjectErrorKey] = responseObject;
-          			}
-        			NSError *errorWithRes = [NSError errorWithDomain:error.domain code:error.code userInfo:[userInfo copy]];
-				[subscriber sendError:errorWithRes];
+                [subscriber sendError:[self errorWithError:error
+                                                  response:response
+                                            responseObject:responseObject]];
 			} else {
 				[subscriber sendNext:RACTuplePack(responseObject, response)];
 				[subscriber sendCompleted];
@@ -76,12 +74,9 @@ NSString *const RACAFNResponseObjectErrorKey = @"responseObject";
 		
 		NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 			if (error) {
-				NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
-				if (responseObject) {
-					userInfo[RACAFNResponseObjectErrorKey] = responseObject;
-				}
-				NSError *errorWithRes = [NSError errorWithDomain:error.domain code:error.code userInfo:[userInfo copy]];
-				[subscriber sendError:errorWithRes];
+                [subscriber sendError:[self errorWithError:error
+                                                  response:response
+                                            responseObject:responseObject]];
 			} else {
 				[subscriber sendNext:RACTuplePack(responseObject, response)];
 				[subscriber sendCompleted];
@@ -93,6 +88,17 @@ NSString *const RACAFNResponseObjectErrorKey = @"responseObject";
 			[task cancel];
 		}];
 	}];
+}
+
+- (NSError*)errorWithError:(NSError*)error response:(NSURLResponse*)response responseObject:(id)responseObject {
+    NSMutableDictionary* userInfo = [error.userInfo mutableCopy];
+    if (response) {
+        userInfo[RACAFNResponseErrorKey] = response;
+    }
+    if (responseObject) {
+        userInfo[RACAFNResponseObjectErrorKey] = responseObject;
+    }
+    return [NSError errorWithDomain:error.domain code:error.code userInfo:[userInfo copy]];
 }
 
 @end
