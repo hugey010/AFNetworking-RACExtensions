@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AFNetworking-RACExtensions"
-  s.version      = "0.1.9"
+  s.version      = "0.1.10"
   s.summary      = "AFNetworking-RACExtensions is a delightful extension to the AFNetworking classes for iOS and Mac OS X."
   s.homepage     = "http://gitlab.duethealth.com/groups/ios-projects"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
