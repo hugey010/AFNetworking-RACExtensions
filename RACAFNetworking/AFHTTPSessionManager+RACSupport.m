@@ -36,7 +36,7 @@ NSString *const RACAFNResponseErrorKey = @"response";
 		
 		NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 			if (error) {
-                [subscriber sendError:[self errorWithError:error
+                [subscriber sendError:[AFHTTPSessionManager errorWithError:error
                                                   response:response
                                             responseObject:responseObject]];
 			} else {
@@ -74,7 +74,7 @@ NSString *const RACAFNResponseErrorKey = @"response";
 		
 		NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
 			if (error) {
-                [subscriber sendError:[self errorWithError:error
+                [subscriber sendError:[AFHTTPSessionManager errorWithError:error
                                                   response:response
                                             responseObject:responseObject]];
 			} else {
@@ -90,7 +90,7 @@ NSString *const RACAFNResponseErrorKey = @"response";
 	}];
 }
 
-- (NSError*)errorWithError:(NSError*)error response:(NSURLResponse*)response responseObject:(id)responseObject {
++ (NSError*)errorWithError:(NSError*)error response:(NSURLResponse*)response responseObject:(id)responseObject {
     NSMutableDictionary* userInfo = [error.userInfo mutableCopy];
     if (response) {
         userInfo[RACAFNResponseErrorKey] = response;

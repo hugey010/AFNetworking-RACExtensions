@@ -8,6 +8,7 @@
 
 #import "AFURLConnectionOperation+RACSupport.h"
 #import "AFHTTPRequestOperation.h"
+#import "AFHTTPSessionManager+RACSupport.h"
 
 @implementation AFURLConnectionOperation (RACSupport)
 
@@ -34,7 +35,9 @@
 			}
 #endif
 		} failure:^(id operation, NSError *error) {
-			[subject sendError:error];
+            AFHTTPRequestOperation* op = operation;
+            NSError* mappedError = [AFHTTPSessionManager errorWithError:error response:op.response responseObject:op.responseObject];
+			[subject sendError:mappedError];
 #ifdef RAFN_MAINTAIN_COMPLETION_BLOCKS
 			if (oldCompBlock) {
 				oldCompBlock();

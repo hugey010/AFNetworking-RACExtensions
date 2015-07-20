@@ -44,6 +44,10 @@ extern NSString *const RACAFNResponseErrorKey;
 /// resulting JSON object and response headers or error.
 - (RACSignal *)rac_DELETE:(NSString *)path parameters:(id)parameters;
 
+
+/// Method to map HTTP errors onto an NSError object to provide a more verbose error.
++ (NSError*)errorWithError:(NSError*)error response:(NSURLResponse*)response responseObject:(id)responseObject;
+
 @end
 
 #endif
