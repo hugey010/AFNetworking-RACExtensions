@@ -7,7 +7,7 @@
 //
 
 #import "AFURLConnectionOperation+RACSupport.h"
-#import "AFHTTPRequestOperation.h"
+#import <AFNetworking/AFHTTPRequestOperation.h>
 #import "AFHTTPSessionManager+RACSupport.h"
 
 @implementation AFURLConnectionOperation (RACSupport)
