@@ -92,13 +92,17 @@ NSString *const RACAFNResponseErrorKey = @"response";
 
 + (NSError*)errorWithError:(NSError*)error response:(NSURLResponse*)response responseObject:(id)responseObject {
     NSMutableDictionary* userInfo = [error.userInfo mutableCopy];
+    NSInteger errorCode = error.code;
     if (response) {
         userInfo[RACAFNResponseErrorKey] = response;
     }
     if (responseObject) {
         userInfo[RACAFNResponseObjectErrorKey] = responseObject;
+        NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+        errorCode = httpResponse.statusCode;
     }
-    return [NSError errorWithDomain:error.domain code:error.code userInfo:[userInfo copy]];
+    
+    return [NSError errorWithDomain:error.domain code:errorCode userInfo:[userInfo copy]];
 }
 
 @end
