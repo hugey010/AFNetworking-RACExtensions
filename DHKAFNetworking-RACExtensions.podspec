@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "DHKAFNetworking-RACExtensions"
-  s.version      = "0.2.4"
+  s.version      = "0.2.5"
   s.summary      = "AFNetworking-RACExtensions is a delightful extension to the AFNetworking classes for iOS and Mac OS X."
-  s.homepage     = "https://github.com/hugey010/AFNetworking-RACExtensions"
+  s.homepage     = "https://github.com/DuetHealth/AFNetworking-RACExtensions"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Robert Widmann" => "devteam.codafi@gmail.com" }
-  s.source       = { :git => "git@github.com:hugey010/AFNetworking-RACExtensions.git", :tag => s.version }
+  s.source       = { :git => "git@github.com:DuetHealth/AFNetworking-RACExtensions.git", :tag => s.version }
   s.source_files = 'RACAFNetworking/**/*.{h,m}'
   s.ios.deployment_target = '6.0'
   s.osx.deployment_target = '10.8'
