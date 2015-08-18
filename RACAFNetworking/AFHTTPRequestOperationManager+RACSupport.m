@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 CodaFi. All rights reserved.
 //
 
-#import "AFHTTPRequestOperationManager+RACSupport.h"
-#import "AFURLConnectionOperation+RACSupport.h"
+#import <AFHTTPRequestOperationManager+RACSupport.h>
+#import <AFURLConnectionOperation+RACSupport.h>
 #import <AFNetworking/AFHTTPRequestOperation.h>
 
 @implementation AFHTTPRequestOperationManager (RACSupport)

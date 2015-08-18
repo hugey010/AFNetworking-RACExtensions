@@ -8,7 +8,7 @@
 
 #if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
 
-#import "AFHTTPSessionManager+RACSupport.h"
+#import <AFHTTPSessionManager+RACSupport.h>
 
 NSString *const RACAFNResponseObjectErrorKey = @"responseObject";
 NSString *const RACAFNResponseErrorKey = @"response";
